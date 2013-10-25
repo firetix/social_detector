@@ -1,5 +1,5 @@
 /**
- * https://github.com/stereobooster/social_detector
+ * https://github.com/firetix/social_detector
  * v0.1.0
  */
 (function (window, undefined) {
@@ -36,6 +36,9 @@
 		twitter: {
 			img_url: 'https://twitter.com/login?redirect_after_login=%2Fimages%2Fspinner.gif'
 		},
+		tumblr: {
+			img_url: 'https://www.tumblr.com/login?redirect_to=%2Fimages%2Ftumblr_logo_singup.png'
+		},
 		facebook: {
 			src: '//connect.facebook.net/en_US/all.js',
 			init: function(name){
@@ -43,17 +46,6 @@
 					FB.init({ appId:this.appId, status:true, cookie:true, xfbml:true});
 					FB.getLoginStatus(function(response){
 						login_status(name, response.status!=='unknown');
-					});
-				};
-			}
-		},
-		vkontakte: {
-			src: 'http://vkontakte.ru/js/api/openapi.js',
-			init: function(name){
-				window.vkAsyncInit = function() {
-					VK.init({ apiId: this.appId });
-					VK.Auth.getLoginStatus(function(response) {
-						login_status(name, response.session);
 					});
 				};
 			}
@@ -84,9 +76,6 @@
 		}
 		if (options.facebook) {
 			detectors.facebook.appId = options.facebook;
-		}
-		if (options.vkontakte) {
-			detectors.vkontakte.appId = options.vkontakte;
 		}
 		if (options.callback) {
 			login_status = options.callback;
